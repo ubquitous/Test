@@ -1,0 +1,82 @@
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\obj\Debug\CrossDoubleN.csprojResolveAssemblyReference.cache
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\CrossDoubleN.dll.config
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\CrossDoubleN.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\CrossDoubleN.pdb
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Antlr3.Runtime.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\EntityFramework.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\EntityFramework.SqlServer.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Security.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Newtonsoft.Json.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Owin.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Helpers.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Mvc.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Optimization.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Razor.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.Razor.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\WebGrease.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\EntityFramework.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\EntityFramework.SqlServer.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Security.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Helpers.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Mvc.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Optimization.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.Razor.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\System.Web.WebPages.Razor.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Newtonsoft.Json.xml
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\bin\Antlr3.Runtime.pdb
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\obj\Debug\CrossDoubleN.dll
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\obj\Debug\CrossDoubleN.pdb
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\obj\Debug\CrossDoubleN.Properties.Resources.resources
+C:\Users\Maksim\Desktop\учеба наверно\3курс 1 симестр\Kurushin\CrossDoubleN\CrossDoubleN\obj\Debug\CrossDoubleN.csproj.GenerateResource.Cache
+C:\git-project\HTML5\CrossDoubleN\bin\CrossDoubleN.dll.config
+C:\git-project\HTML5\CrossDoubleN\bin\CrossDoubleN.dll
+C:\git-project\HTML5\CrossDoubleN\bin\CrossDoubleN.pdb
+C:\git-project\HTML5\CrossDoubleN\bin\Antlr3.Runtime.dll
+C:\git-project\HTML5\CrossDoubleN\bin\EntityFramework.dll
+C:\git-project\HTML5\CrossDoubleN\bin\EntityFramework.SqlServer.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Security.Cookies.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Security.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Web.Infrastructure.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Newtonsoft.Json.dll
+C:\git-project\HTML5\CrossDoubleN\bin\Owin.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Helpers.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Mvc.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Optimization.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Razor.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.Deployment.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.dll
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.Razor.dll
+C:\git-project\HTML5\CrossDoubleN\bin\WebGrease.dll
+C:\git-project\HTML5\CrossDoubleN\bin\EntityFramework.xml
+C:\git-project\HTML5\CrossDoubleN\bin\EntityFramework.SqlServer.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Security.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Microsoft.Owin.Security.Cookies.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Helpers.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Mvc.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Optimization.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.Razor.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.Deployment.xml
+C:\git-project\HTML5\CrossDoubleN\bin\System.Web.WebPages.Razor.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Newtonsoft.Json.xml
+C:\git-project\HTML5\CrossDoubleN\bin\Antlr3.Runtime.pdb
+C:\git-project\HTML5\CrossDoubleN\obj\Debug\CrossDoubleN.csprojResolveAssemblyReference.cache
+C:\git-project\HTML5\CrossDoubleN\obj\Debug\CrossDoubleN.Properties.Resources.resources
+C:\git-project\HTML5\CrossDoubleN\obj\Debug\CrossDoubleN.csproj.GenerateResource.Cache
+C:\git-project\HTML5\CrossDoubleN\obj\Debug\CrossDoubleN.dll
+C:\git-project\HTML5\CrossDoubleN\obj\Debug\CrossDoubleN.pdb

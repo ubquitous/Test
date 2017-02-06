@@ -1,0 +1,177 @@
+﻿@model CrossDoubleN.ViewModels.cr
+@{
+    ViewBag.Title = "Create Crossword";
+}
+
+<head>
+    <style>
+        table {
+            float: left;
+            border: 3px solid #000;
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+
+        td {
+            border: 1px solid #8F8F8F;
+            width: 18px;
+            height: 17px;
+        }
+
+        .test {
+            border: 1px solid #8F8F8F;
+            width: 18px;
+            height: 17px;
+            background-color: black;
+        }
+
+        #brom {
+            float: left;
+            margin-top: 20px;
+        }
+
+        .over {
+            background-color: black;
+        }
+    </style>
+
+</head>
+<header></header>
+<div id="brom">
+    <div>
+        <form action="Create">
+            <input type="text" name="row" id="row" value="12" pattern="^[ 0-9]+$">
+            <br />
+            <input name="col" type="text" id="col" value="12" pattern="^[ 0-9]+$">
+            <br />
+            <input type="button" value="Отправить" onclick="upd();">
+        </form>
+    </div>
+    <div>
+        <form action="cr">
+            <br />
+            <p>Введите имя кроссворда</p>
+            <input type="text" name="Pers" id="nm" pattern="[A-Za-z]{6,}" />
+            <br />
+            <a href="/Home/Index"><input type="button" value="Сохранить" onclick="fur();" /></a> 
+        </form>
+        <input type="text" id="test" />
+    </div>
+
+</div>
+<table id="result"></table>
+<script>
+    var pok;
+    var pk = false;
+    var bl = [];
+    var per = 0;
+    var per1 = 0;
+
+    var str = new Array();
+
+
+
+    function fur() {
+        var a = per;
+        var b = per1;
+        for (var g = 0; g < a; g++) {
+            str[g] = "";
+            for (var h = 0; h < b; h++) {
+                if (bl[g][h] == true) {
+                    str[g] = str[g] + "1";
+                } else {
+                    str[g] = str[g] + "0";
+                }
+            }
+        }
+
+        var pstData = {
+            name: document.getElementById("nm").value,
+            zn: str,
+            row: per,
+            col: per1
+        };//*/
+        document.getElementById("test").value += str[0];
+        $.ajax({
+            url: '/Home/About',
+            type: 'POST',
+            data: JSON.stringify(pstData),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                alert("Saved crossword!");
+                
+            }
+        });
+
+    }
+    //document.onmouseup = handler;
+
+
+    function func(obj_id, e) {
+        var elem = document.getElementById(obj_id);
+        var q = obj_id.split(' ')[0];
+        var p = obj_id.split(' ')[1];
+        if (elem.style.backgroundColor == '') {
+            pok = true;
+            bl[parseInt(q)][parseInt(p)] = true;
+            elem.style.backgroundColor = 'Black';
+        } else {
+            pok = false;
+            bl[parseInt(q)][parseInt(p)] = false;
+            elem.style.backgroundColor = '';
+        }
+    }
+
+
+    function func1(obj_id, e) {
+        var q = obj_id.split(' ')[0];
+        var p = obj_id.split(' ')[1];
+        if (e.which == 1) {
+            pk = true;
+        } else {
+            pk = false;
+
+        }
+        if (pk == true) {
+            var elem = document.getElementById(obj_id);
+            if (pok == true) {
+                bl[parseInt(q)][parseInt(p)] = true;
+                elem.style.backgroundColor = 'Black';
+            } else {
+                bl[parseInt(q)][parseInt(p)] = false;
+                elem.style.backgroundColor = '';
+            }
+        }
+    }
+
+
+    function upd() {
+        per = parseInt(document.getElementById("row").value);
+        per1 = parseInt(document.getElementById("col").value);
+        var tb = document.getElementById("result");
+        var rowCount = tb.rows.length;
+        for (var i = 0; i < rowCount; i++) {
+            tb.deleteRow(0);
+        }
+
+        for (var g = 0; g < per; g++) {
+            bl[g] = [];
+            for (var h = 0; h < per1; h++) {
+                bl[g][h] = false;
+            }
+        }
+
+        for (var i = 0; i < per; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < per1; j++) {
+                var td = document.createElement('td');
+                td.id = i + " " + j;
+                td.addEventListener("mousedown", function () { func(this.id, event) }, false);
+                td.addEventListener("mouseover", function () { func1(this.id, event) }, false);
+                tr.appendChild(td);
+            }
+            tb.appendChild(tr);
+        }
+
+    };
+</script>

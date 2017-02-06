@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Main";
+}
+<div id="fixmenu">
+    <ul>
+        @if((string) ViewData["str"]=="admin"){
+            <li><a href="~/Home/About">Создать кроссворд</a></li>
+        }
+        <li><a href="~/Home/CrWord">Кроссворды</a></li>
+        <li><a href="#">О проекте</a></li>
+        <li><a href="#">Контакты</a></li>
+    </ul>
+</div>
