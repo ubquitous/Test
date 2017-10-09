@@ -3,40 +3,55 @@
     ViewBag.Title = "Register";
     
 }
+<style>
+    #mess {
+        color:red;
+    }
+</style>
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
+<form name="test" method="post" action="Register">
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary()
-    <h4><font color="red">@ViewBag.MyMessageToUsers</font> </h4>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
+    @if (ViewBag.MyMessageToUsers != null)
+    {
+        <p id="mess">@ViewBag.MyMessageToUsers</p>
+    }
+    <div class="col-md-10">
+        <br />
+        <input type="text" name="name" placeholder="Name" pattern="@ViewBag.x" required />
+    </div>
+    <div class="col-md-10">
+        <br />
+        <input type="password" name="password" pattern="[0-9a-zA-Z]{5,40}" placeholder="Password" id="password" required />
+    </div>
+    <div class="col-md-10">
+        <br />
+        <input type="password" name="confirm_password" pattern="[0-9a-zA-Z]{5,40}" placeholder="Confirm password" id="confirm_password" required />
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Confirm, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Confirm, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+            <br />
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-}
+</form>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <script>
+        var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Поля пароля различаются");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>

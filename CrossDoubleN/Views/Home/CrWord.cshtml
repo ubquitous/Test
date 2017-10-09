@@ -1,443 +1,97 @@
 ﻿@using CrossDoubleN.ViewModels
 @using CrossDoubleN.Models
-@model List<CrossDoubleN.ViewModels.cr>
+@model List<CrossDoubleN.ViewModels.cross>
  
 @{
     ViewBag.Title = "Список кроссвордов";
 }
 <style>
     #listing {
-        height:500px;
-        float:left;
-    
+        float: left;
     }
-    .num_em {
-        background-color: #cdcde2;
-        min-width: 18px;
-        min-height: 19px;
-        max-height: 18px;
-        max-width: 19px;
-        width: 18px;
-        height: 19px;
-        border: 1px solid #9d9d9d;
+    #nub {
+        min-height:400px;
     }
-
-    .num {
-        background-color: #bbbbbb;
-        min-width: 18px;
-        min-height: 19px;
-        max-height: 18px;
-        max-width: 19px;
-        width: 18px;
-        height: 19px;
-        border: 1px solid #808080;
-        
+    .hide {
+        display: none;
     }
-    .cr {
-        min-width: 18px;
-        min-height: 19px;
-        max-height: 18px;
-        max-width: 19px;
-        width: 18px;
-        height: 19px;
-        border: 1px solid #808080;
-    }
-    .empty {
-        background-color: #808080;
-    }
-
-
-
-
 </style>
 <h2>CrWord</h2>
-<select multiple class="form-control opt" id="listing" >
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        <option ondblclick="fuk(this.id, this.value)" value="@Model[i].name" id="@i">@i) @Model[i].name</option>
-    }
-</select>
-<div id="timer">
-    <span id="timer_hours"></span>
-    :
-    <span id="timer_minures"></span>
-    :
-    <span id="timer_seconds"></span>
-</div>
-   <div>
-       <table id="res">
-           
-       </table>
-   </div>
-    <div>
-        <input type="text" id="test" />
-    </div>
-<script type="text/javascript">
-    var ar = new Array();
-    var str = new Array();//значения верно заполненого кроссворда
-    var endar=new Array();//инфо о заполнение кроссворда пользователем
-    var maxRow=0;//максимальное число колонок в правой таблице
-    var maxCol=0;//максимальное число строк в верхней таблице
-    var k = 0;
-    var kar = 0;
-    var timepr=false;
-    var sec=0, hours=0, min=0;
-    
-    @foreach(cr a in Model){
-            <text>
-        kar=0;
-    str[k]=new Array();
-    </text>
-    foreach(string b in a.zn){
-        <text>
-str[k][kar]="";
-    </text>
-    foreach(char c in b){
-     <text>
-str[k][kar]+=@c;
-    </text>
-    }  
-    <text>
-        kar++;
-    </text> 
-    }
-            <text>
-        k++;
-    </text>
-    }
-
-    function tim(){
-        sec++;
-        if(sec==60){
-            min++;
-            sec=0;
-        }
-        if(min==60){
-            hours++;
-            min=0;
-        }
-        if(sec<10){
-            document.getElementById("timer_seconds").textContent="0"+sec;
-        }else{
-            document.getElementById("timer_seconds").textContent=sec;
-        }
-        if(min<10){
-            document.getElementById("timer_minures").textContent="0"+min;
-        }else{
-            document.getElementById("timer_minures").textContent=min;
-        }
-        document.getElementById("timer_hours").textContent=hours;
-    }
-    var timeid;
-    function fuk(j, nam) {
-        timepr=true;
-        sec=0;
-        hours=0;
-        min=0;
-        tim();
-        clearInterval(timeid);
-        timeid=setInterval(function() { tim(); }, 1000);
-        maxRow=0;
-        maxCol=0;
-        ar=new Array();
-        endar=new Array();
-        for(var y=0; y<str[j].length;y++){
-            ar[y]=new Array();
-            endar[y]=new Array();
-            kar=0;
-            for(var x=0; x<str[j][y].length; x++){
-                endar[y][x]=false;
-                if(str[j][y][x]==1){
-                    ar[y][x]=true;
-                    if(x>0){
-                        if(str[j][y][x-1]==0){
-                            kar++;
-                        }
-                    }else{
-                        kar++;
-                    }
-                }else{
-                    ar[y][x]=false;
-                }
-            }
-            if(kar>maxRow){
-                maxRow=kar;
-            }
-        }
-
-        for(var y=0; y<str[j][0].length;y++){
-            kar=0;
-            for(var x=0; x<str[j].length; x++){
-                if(str[j][x][y]==1){
-                    if(x>0){
-                        if(str[j][x-1][y]==0){
-                            kar++;
-                        }
-                    }else{
-                        kar++;
-                    }
-                }
-            }
-            if(kar>maxCol){
-                maxCol=kar;
-            }
-        }
-        var empt=document.getElementById("res");//таблица всего кроссворда(состоит из 4 таблиц)
-        delr(empt);//очитска таблицы
-        var tr=new Array();//столбцы кросворда
-        for(var i=0; i<2;i++){
-            tr[i]=document.createElement('tr');   
-        }
-        var w=maxRow*18;//максимальная ширина левой нижней таблицы
-        var h=maxCol*19;//максимальная высота правой верхней таблицы
-        cret(h, w, tr[0]);
-        var cl=new Array();//верхняя таблица с информацией
-        var rw=new Array();//правая таблица с инфой
-
-        for(var i=0;i<maxCol;i++){
-            cl[i]=new Array();
-            for(var q=0; q<str[j][0].length; q++){
-                cl[i][q]=0;
-            }
-        }
-
-        for(var i=0;i<str[0].length;i++){
-            rw[i]=new Array();
-            for(var q=0; q<maxRow; q++){
-                rw[i][q]=0;
-            }
-            var par=new Array();
-            var peremen=0;
-            for(var q=0; q<ar[i].length;q++){
-                if(ar[i][q]==true){
-                    var wer=0;
-                    while(q<ar[i].length && ar[i][q]==true){
-                        wer++;
-                        q++;
-                    }
-                    par[peremen]=wer;
-                    peremen++;
-                }
-            }
-            for(var q=1;q<=par.length; q++){
-                rw[i][maxRow-q]=par[par.length-q];
-            }
-        }
-        for(var i=0;i<ar[0].length;i++){
-            var par=new Array();
-            var peremen=0;
-            for(var q=0; q<ar.length;q++){
-                if(ar[q][i]==true){
-                    var wer=0;
-                    while(q<ar.length && ar[q][i]==true){
-                        wer++;
-                        q++;
-                    }
-                    par[peremen]=wer;
-                    peremen++;
-                }
-            }
-            for(var q=1;q<=par.length; q++){
-                cl[maxCol-q][i]=par[par.length-q];
-            }
-        }
-        var td0=document.createElement("td");
-        td0.style.border='2px solid #000000';
-        var tbtop=document.createElement("table");//таблица сверху слева, ее создание
-        for(var fr=0; fr<cl.length;fr++){
-            var trtp=document.createElement("tr");
-            for(var j=0;j<cl[fr].length;j++){
-                var tdtp=document.createElement("td");
-                if(cl[fr][j]!=0){
-                    var perg=document.createElement("div");
-                    perg.textContent=cl[fr][j];
-                    tdtp.classList.add("num");
-                    perg.style.fontSize='11px';
-                    perg.style.fontFamily='Verdana,Arial,sans-serif';
-                    perg.style.textAlign="center";
-                    tdtp.appendChild(perg);
-                }else{
-                    tdtp.classList.add("num_em");
-                }
-                if((j+1)%5==0){
-                    tdtp.style.borderRight='2px solid #707070';
-
-                }
-                trtp.appendChild(tdtp);
-            }
-            tbtop.appendChild(trtp);
-        }
-        td0.appendChild(tbtop);
-        tr[0].appendChild(td0);
-        var td1=document.createElement("td");
-        td1.style.border='2px solid #000000';
-        var tbRight=document.createElement("table");//таблица справа снизу, ее создание
-        for(var i=0; i<rw.length;i++){
-            var trtp=document.createElement("tr");
-            for(var j=0;j<rw[i].length;j++){
-                var tdtr=document.createElement("td");
-                if(rw[i][j]!=0){
-                    var perg=document.createElement("div");
-                    perg.textContent=rw[i][j];
-                    perg.style.fontSize='11px';
-                    perg.style.fontFamily='Verdana,Arial,sans-serif';
-                    perg.style.textAlign="center";
-                    tdtr.classList.add("num");
-                    tdtr.appendChild(perg);
-                }else{
-                    tdtr.classList.add("num_em");                
-                }
-                if((i+1)%5==0){
-                    tdtr.style.borderBottom='2px solid #707070';
-                }
-                trtp.appendChild(tdtr);
-            }
-            tbRight.appendChild(trtp);
-        }
-        td1.appendChild(tbRight);
-        tr[1].appendChild(td1);
-
-        var maintd=document.createElement("td");
-        maintd.style.border='2px solid #000000';
-        var maintable=document.createElement("table");
-        for(var i=0; i<endar.length;i++){
-            var trmn=document.createElement("tr");
-            for(var j=0;j<endar[i].length;j++){
-                var tdmn=document.createElement("td");//должны прикручиваться функции
-                tdmn.classList.add("cr");
-                if((j+1)%5==0){
-                    tdmn.style.borderRight='2px solid #707070';
-                }
-                if((i+1)%5==0){
-                    tdmn.style.borderBottom='2px solid #707070';
-                }
-                tdmn.id=i+" "+j;
-                tdmn.addEventListener("mousedown", function () { func(this.id, event) }, false);
-                tdmn.addEventListener("mouseover", function () { func1(this.id, event) }, false);
-                trmn.appendChild(tdmn);
-            }
-            maintable.appendChild(trmn);
-        }
-        maintd.appendChild(maintable);
-        tr[1].appendChild(maintd);
-        empt.appendChild(tr[0]);
-        empt.appendChild(tr[1]);
-        kar=0;
-
-    }
-
-    var pok;
-    var prover=false;
-    function func(obj_id, e){
-        var elem = document.getElementById(obj_id);
-        var q = obj_id.split(' ')[0];
-        var p = obj_id.split(' ')[1];
-        if(endar[q][p]){
-            pok=false;
-            endar[q][p]=false;
-            elem.style.backgroundColor='White';
-        }else{
-            pok=true;
-            endar[q][p]=true;
-            elem.style.backgroundColor='Black';
-        }
-        proverka();
-
-    }
-
-    function func1(obj_id, e) {
-        var q = parseInt(obj_id.split(' ')[0]);
-        var p = parseInt(obj_id.split(' ')[1]);
-        if (e.which == 1) {
-            pk = true;
-            prover=true;
-        } else {
-            pk = false;
-            if(prover){
-                prover=false;
-                proverka();
-            }
+<div id="listing">
+    <select id="nub" multiple class="form-control opt">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <option ondblclick="resul(this.value,this.id)" value="@Model[i].name" id="@Model[i].id">@i) @Model[i].name</option>
 
         }
-        if (pk == true) {
-            var elem = document.getElementById(obj_id);
-            if (pok == true) {
-                endar[q][p] = true;
-                elem.style.backgroundColor = 'Black';
-            } else {
-                endar[q][p] = false;
-                elem.style.backgroundColor = '';
-            }
-        }
-    }
-    //создание пустой таблицы(левой верхней)
-    function cret(h, w, tr){
-        var te=document.createElement("td");
-        te.style.backgroundColor='#f0f0f0';
-        var kr=w+'px';
-        te.style.width=kr;
-        kr=h+'px'; 
-        te.style.border='2px solid #000000';
-        te.style.height=kr;
-        tr.appendChild(te);
-        var test=document.getElementById("test");//проверка
-        test.value=h+" "+w;
-       
-    }
-
-    function proverka(){
-        //endar, ar
-        var prv=true;
-        for(var i=0;i<ar.length;i++){
-            var prav=true;
-            for(var j=0;j<ar[i].length;j++){
-                document.getElementById(i+" "+j).style.backgroundImage=null;
-                if(ar[i][j]!=endar[i][j]){
-                    prav=false;
-                    prv=false;
-                }
-            }
-            if(prav){
-                for(var j=0; j<endar[i].length;j++){
-                    if(endar[i][j]==false){
-                        document.getElementById(i+" "+j).style.backgroundPosition="center center";
-                        document.getElementById(i+" "+j).style.backgroundImage="url('../Content/cutout2b.gif')";
-                    }
-                }
-            }
-        }
-        for(var i=0; i<ar[0].length;i++){
-            var prav=true;
-            for(var j=0; j<ar.length;j++){
-                if(endar[j][i]!=ar[j][i]){
-                    prav=false;
-                    prv=false;
-                }
-            }
-            if(prav){
-                for(var j=0; j<endar.length;j++){
-                    if(endar[j][i]==false){
-                        document.getElementById(j+" "+i).style.backgroundPosition="center center";
-                        document.getElementById(j+" "+i).style.backgroundImage="url('../Content/cutout2b.gif')";
-                    }
-                }
-            }
-        }
-        if(prv){
-            clearInterval(timeid);
-            alert("Вы разгадали кроссворд! Ваше время: "+hours+" часов "+min+" минут "+sec+" секунд");
+    </select>
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="disabled" id="pr">
+                <a href="#" aria-label="Previous" onclick="prev()">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li> 
+                <li id="1li" class="active"><a href="#" onclick="lis(this.innerHTML, 1)" id="ur1">1</a></li>
+                <li id="2li"><a href="#" onclick="lis(this.innerHTML, 2)" id="ur2">2</a></li>
+                <li id="3li"><a href="#" onclick="lis(this.innerHTML, 3)" id="ur3">3</a></li>
+                <li id="4li"><a href="#" onclick="lis(this.innerHTML, 4)" id="ur4">4</a></li>
+                <li id="5li"><a href="#" onclick="lis(this.innerHTML, 5)" id="ur5">5</a></li>
+                <li id="6li"><a href="#" onclick="lis(this.innerHTML, 6)" id="ur6">6</a></li>
+            <li id="nx">
+                <a href="#" aria-label="Next" onclick="next()">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
             
-        }
+        </ul>
+    </nav>
+</div>
+
+<div id="results"></div>
+
+<script type="text/javascript">
+    var n = 1;
+    var k=1;
+    lis(1,1);
+    function lis(number, mar){
+        
+        for(var i=-3; i<4; i++){
+            var per = i + 4;
+            var p = mar + i;
+            var e = document.getElementById("ur" + per);
+            var et = document.getElementById(per+"li");
+            e.innerHTML = p;
+            et.style.display=null;
+            if (p < 1) {
+                et.style.display = "none";
+            }
+            if (p > (@ViewBag.num)) {
+                et.style.display = "none";
+            }
+    }
+    var elem = document.getElementById(mar+"li");
+    elem.classList=null;
+    elem.classList.add("active");
+    document.getElementById(k+"li").classList=null;
+    n = number;
+    k=mar;
+        
     }
 
-    function delr(tb){
-        while(tb.firstChild){
-            tb.removeChild(tb.firstChild);
-        }
+    function next() {
+        n++;
+        lis(n, k+1);
     }
 
-    //обработка действий над кроссвордом
-    function obr(){
+    function prev() {
+        n--;
+        k--;
+        lis(n, k+1);
+    }
+
+    function resul(name, id) {
+        $('#results').load('@Url.Action("Crosswordes", "Home")?id=' + id);
 
     }
 </script>

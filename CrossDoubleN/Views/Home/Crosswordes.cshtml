@@ -1,0 +1,417 @@
+﻿
+@model CrossDoubleN.ViewModels.InfoCr
+<style>
+    .num_em {
+        background-color: #cdcde2;
+        min-width: 18px;
+        min-height: 19px;
+        max-height: 18px;
+        max-width: 19px;
+        width: 18px;
+        height: 19px;
+        border: 1px solid #9d9d9d;
+    }
+
+    .num {
+        background-color: #bbbbbb;
+        min-width: 18px;
+        min-height: 19px;
+        max-height: 18px;
+        max-width: 19px;
+        width: 18px;
+        height: 19px;
+        border: 1px solid #808080;
+    }
+
+    .cr {
+        min-width: 18px;
+        min-height: 19px;
+        max-height: 18px;
+        max-width: 19px;
+        width: 18px;
+        height: 19px;
+        border: 1px solid #808080;
+    }
+
+    .empty {
+        background-color: #808080;
+    }
+</style>
+
+
+<div id="timer">
+    <span id="timer_hours"></span>
+    :
+    <span id="timer_minures"></span>
+    :
+    <span id="timer_seconds"></span>
+</div>
+<div onselectstart="return false">
+    <table id="res"></table>
+</div>
+<div>
+    <input type="text" id="test" />
+</div>
+
+
+
+<script type="text/javascript">
+
+    var sec = 0, hours = 0, min = 0;
+    var end=new Array();
+    var ended = JSON.parse(JSON.stringify(
+    @ViewBag.resu));
+    for (var i = 0; i < ended.length; i++) {
+        end[i]=new Array
+        for (var j = 0; j < ended[i].length; j++) {
+            end[i][j] = false;
+            if (ended[i][j] == 1) {
+                end[i][j] = true;
+            }
+        }
+    }
+    sec = 0;
+    hours = 0;
+    min = 0;
+    tim();
+    clearInterval(timeid);
+    timeid = setInterval(function () { tim(); }, 1000);
+
+
+    var timeid;
+    var MaxRow=JSON.parse(@Model.row);
+    var MaxCol=JSON.parse(@Model.col);
+    var arr=new Array();
+    
+    //Создание массива хранящем информацию о кроссворде
+    for (var i = 0; i < MaxRow; i++) {
+        arr[i] = new Array();
+        for (var j = 0; j < MaxCol; j++) {
+            arr[i][j] = false;
+        }
+    }
+    MaxCol = 0;
+    MaxRow = 0;
+    for(var y=0; y<end[0].length;y++){
+        var kar=0;
+        for(var x=0; x<end.length; x++){
+            if(end[x][y]==true){
+                if(x>0){
+                    if(end[x-1][y]==false){
+                        kar++;
+                    }
+                }else{
+                    kar++;
+                }
+            }
+        }
+        if(kar>MaxCol){
+            MaxCol=kar;
+        }
+    }
+
+    for(var y=0; y<end.length;y++){
+       
+        var kar=0;
+        for(var x=0; x<end[y].length; x++){
+            if(end[y][x]==true){
+                if(x>0){
+                    if(end[y][x-1]==false){
+                        kar++;
+                    }
+                }else{
+                    kar++;
+                }
+            }
+            if(kar>MaxRow){
+                MaxRow=kar;
+            }
+        }
+    }
+        
+        var empt = document.getElementById("res");//таблица всего кроссворда(состоит из 4 таблиц)
+        delr(empt);//очитска таблицы
+        var tr = new Array();//столбцы кросворда
+        for (var i = 0; i < 2; i++) {
+            tr[i] = document.createElement('tr');
+        }
+        var w = MaxRow * 18;//максимальная ширина левой нижней таблицы
+        var h = MaxCol * 19;//максимальная высота правой верхней таблицы
+        cret(h, w, tr[0]);
+        var cl = new Array();//верхняя таблица с информацией
+        var rw = new Array();//левая таблица с инфой
+
+        for (var i = 0; i < MaxCol; i++) {
+            cl[i] = new Array();
+            for (var q = 0; q < end[i].length; q++) {
+                cl[i][q] = 0;
+            }
+        }
+
+        for (var i = 0; i < end.length; i++) {
+            rw[i] = new Array();
+            for (var q = 0; q < MaxRow; q++) {
+                rw[i][q] = 0;
+            }
+            var par = new Array();
+            var peremen = 0;
+            for (var q = 0; q < end[i].length; q++) {
+                if (end[i][q] == true) {
+                    var wer = 0;
+                    while (q < end[i].length && end[i][q] == true) {
+                        wer++;
+                        q++;
+                    }
+                    par[peremen] = wer;
+                    peremen++;
+                }
+            }
+            for (var q = 1; q <= par.length; q++) {
+                rw[i][MaxRow - q] = par[par.length - q];
+            }
+        }
+        document.getElementById("test").value += "1";
+
+        for (var i = 0; i < end[0].length; i++) {
+            var par = new Array();
+            var peremen = 0;
+            for (var q = 0; q < end.length; q++) {
+                if (end[q][i] == true) {
+                    var wer = 0;
+                    while (q < end.length && end[q][i] == true) {
+                        wer++;
+                        q++;
+                    }
+                    par[peremen] = wer;
+                    peremen++;
+                }
+            }
+            for (var q = 1; q <= par.length; q++) {
+                cl[MaxCol - q][i] = par[par.length - q];
+            }
+        }
+        document.getElementById("test").value += "2";
+        var td0 = document.createElement("td");
+        td0.style.border = '2px solid #000000';
+        var tbtop = document.createElement("table");//таблица сверху справа, ее создание
+        for (var fr = 0; fr < cl.length; fr++) {
+            var trtp = document.createElement("tr");
+            for (var j = 0; j < cl[fr].length; j++) {
+                var tdtp = document.createElement("td");
+                if (cl[fr][j] != 0) {
+                    var perg = document.createElement("div");
+                    perg.textContent = cl[fr][j];
+                    tdtp.classList.add("num");
+                    perg.style.fontSize = '11px';
+                    perg.style.fontFamily = 'Arial,sans-serif';
+                    perg.style.textAlign = "center";
+                    tdtp.appendChild(perg);
+                } else {
+                    tdtp.classList.add("num_em");
+                }
+                if ((j + 1) % 5 == 0) {
+                    tdtp.style.borderRight = '2px solid #707070';
+
+                }
+                trtp.appendChild(tdtp);
+            }
+            tbtop.appendChild(trtp);
+        }
+        document.getElementById("test").value += "3";
+        td0.appendChild(tbtop);
+        tr[0].appendChild(td0);
+        var td1 = document.createElement("td");
+        td1.style.border = '2px solid #000000';
+
+        var tbRight = document.createElement("table");//таблица слева снизу, ее создание
+        for (var i = 0; i < rw.length; i++) {
+            var trtp = document.createElement("tr");
+            for (var j = 0; j < rw[i].length; j++) {
+                var tdtr = document.createElement("td");
+                if (rw[i][j] != 0) {
+                    var perg = document.createElement("div");
+                    perg.textContent = rw[i][j];
+                    perg.style.fontSize = '11px';
+                    perg.style.fontFamily = 'Arial,sans-serif';
+                    perg.style.textAlign = "center";
+                    tdtr.classList.add("num");
+                    tdtr.appendChild(perg);
+                } else {
+                    tdtr.classList.add("num_em");
+                }
+                if ((i + 1) % 5 == 0) {
+                    tdtr.style.borderBottom = '2px solid #707070';
+                }
+                trtp.appendChild(tdtr);
+            }
+            tbRight.appendChild(trtp);
+        }
+        td1.appendChild(tbRight);
+        tr[1].appendChild(td1);
+        document.getElementById("test").value += "4";
+
+        var maintd = document.createElement("td");
+        maintd.style.border = '2px solid #000000';
+        var maintable = document.createElement("table");
+        for (var i = 0; i < end.length; i++) {
+            var trmn = document.createElement("tr");
+            for (var j = 0; j < end[i].length; j++) {
+                var tdmn = document.createElement("td");
+                tdmn.classList.add("cr");
+
+                if ((j + 1) % 5 == 0) {
+                    tdmn.style.borderRight = '2px solid #707070';
+                }
+                if ((i + 1) % 5 == 0) {
+                    tdmn.style.borderBottom = '2px solid #707070';
+                }
+                tdmn.id = i + " " + j;
+                tdmn.addEventListener("mousedown", function () { func(this.id, event) }, false);
+                tdmn.addEventListener("mouseover", function () { func1(this.id, event) }, false);
+                trmn.appendChild(tdmn);
+            }
+            maintable.appendChild(trmn);
+        }
+        maintd.appendChild(maintable);
+        tr[1].appendChild(maintd);
+        empt.appendChild(tr[0]);
+        empt.appendChild(tr[1]);
+        kar = 0;
+        document.getElementById("test").value += "5";
+    
+
+
+    var pok;
+    var prover = false;
+    function func(obj_id, e) {
+        var elem = document.getElementById(obj_id);
+        var q = obj_id.split(' ')[0];
+        var p = obj_id.split(' ')[1];
+        if (arr[q][p]) {
+            pok = false;
+            arr[q][p] = false;
+            elem.style.backgroundColor = 'White';
+        } else {
+            pok = true;
+            arr[q][p] = true;
+            elem.style.backgroundColor = 'Black';
+        }
+        proverka();
+
+    }
+
+    function func1(obj_id, e) {
+        var q = parseInt(obj_id.split(' ')[0]);
+        var p = parseInt(obj_id.split(' ')[1]);
+        if (e.which == 1) {
+            pk = true;
+            prover = true;
+        } else {
+            pk = false;
+            if (prover) {
+                prover = false;
+                proverka();
+            }
+
+        }
+        if (pk == true) {
+            var elem = document.getElementById(obj_id);
+            if (pok == true) {
+                arr[q][p] = true;
+                elem.style.backgroundColor = 'Black';
+            } else {
+                arr[q][p] = false;
+                elem.style.backgroundColor = '';
+            }
+        }
+    }
+    //создание пустой таблицы(левой верхней)
+    function cret(h, w, tr) {
+        var te = document.createElement("td");
+        te.style.backgroundColor = '#f0f0f0';
+        var kr = w + 'px';
+        te.style.width = kr;
+        kr = h + 'px';
+        te.style.border = '2px solid #000000';
+        te.style.height = kr;
+        tr.appendChild(te);
+
+    }
+
+    function proverka() {
+        //endar, ar
+        var prv = true;
+        for (var i = 0; i < arr.length; i++) {
+            var prav = true;
+            for (var j = 0; j < arr[i].length; j++) {
+                document.getElementById(i + " " + j).style.backgroundImage = null;
+                if (arr[i][j] != end[i][j]) {
+                    prav = false;
+                    prv = false;
+                }
+            }
+            if (prav) {
+                for (var j = 0; j < end[i].length; j++) {
+                    if (end[i][j] == false) {
+                        document.getElementById(i + " " + j).style.backgroundPosition = "center center";
+                        document.getElementById(i + " " + j).style.backgroundImage = "url('../Content/cutout2b.gif')";
+                    }
+                }
+            }
+        }
+        for (var i = 0; i < arr[0].length; i++) {
+            var prav = true;
+            for (var j = 0; j < arr.length; j++) {
+                if (end[j][i] != arr[j][i]) {
+                    prav = false;
+                    prv = false;
+                }
+            }
+            if (prav) {
+                for (var j = 0; j < end.length; j++) {
+                    if (end[j][i] == false) {
+                        document.getElementById(j + " " + i).style.backgroundPosition = "center center";
+                        document.getElementById(j + " " + i).style.backgroundImage = "url('../Content/cutout2b.gif')";
+                    }
+                }
+            }
+        }
+        if (prv) {
+            clearInterval(timeid);
+            alert("Вы разгадали кроссворд! Ваше время: " + hours + " часов " + min + " минут " + sec + " секунд");
+
+        }
+    }
+
+    function delr(tb) {
+        while (tb.firstChild) {
+            tb.removeChild(tb.firstChild);
+        }
+    }
+
+
+
+    function tim() {
+        sec++;
+        if (sec == 60) {
+            min++;
+            sec = 0;
+        }
+        if (min == 60) {
+            hours++;
+            min = 0;
+        }
+        if (sec < 10) {
+            document.getElementById("timer_seconds").textContent = "0" + sec;
+        } else {
+            document.getElementById("timer_seconds").textContent = sec;
+        }
+        if (min < 10) {
+            document.getElementById("timer_minures").textContent = "0" + min;
+        } else {
+            document.getElementById("timer_minures").textContent = min;
+        }
+        document.getElementById("timer_hours").textContent = hours;
+        
+    }
+    </script>

@@ -7,6 +7,8 @@ using CrossDoubleN.Models;
 using CrossDoubleN.ViewModels;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace CrossDoubleN.Controllers
 {
@@ -53,6 +55,7 @@ namespace CrossDoubleN.Controllers
                 }
             }
             pstData.name += str;
+            
             Crossword cros = new Crossword() { name=pstData.name, IdZnach=new List<znach>() };
             int k=0;
             foreach (string a in pstData.zn)
@@ -78,39 +81,91 @@ namespace CrossDoubleN.Controllers
             db.cross.Load();
             db.znach.Load();
             List<Crossword> ab = db.cross.ToList();
-            List<cr> perem = new List<cr>();
-            foreach (Crossword a in ab)
+            int numb = ab.Count() / 5;
+            if (ab.Count() % 5 > 0)
             {
-                perem.Add(new cr() { name = a.name, col = a.IdZnach[0].row.Length, row = a.IdZnach.Count });
-                int num=perem.Count()-1;
-                perem[num].zn = new List<string>();
-                foreach (znach b in a.IdZnach)
+                numb++;
+            }
+            ViewBag.num=numb;
+            ViewBag.now = 1;
+            List<cross> perem = new List<cross>();
+            
+            for(int i=0; i<ab.Count();i++)
+            {
+                perem.Add(new cross() { name = ab[i].name, id=ab[i].id });
+                if (i == 4)
                 {
-                    perem[num].zn.Add(b.row);
+                    break;
                 }
             }
-            ViewBag.Aber = new List<string> { "sd", "sd" };
             return View(perem);
         }
 
         [HttpPost]
-        public async Task<ActionResult> CrWord(string gar)
+        public ActionResult CrWord(int num)
         {
             CrossContext db = new CrossContext();
             db.cross.Load();
             db.znach.Load();
-            Crossword cross=await db.cross.Include(u => u.name).FirstOrDefaultAsync(u => u.name == gar);
-            List<cr> perem = new List<cr>();
-            
-            
-            cross.sort();
-            List<string> aber = new List<string>();
-            foreach(znach a in cross.IdZnach)
+
+            List<Crossword> ab = db.cross.ToList();
+            int numb = ab.Count() / 5;
+            if (ab.Count() % 5 > 0)
             {
-                aber.Add(a.row);
+                numb++;
             }
-            ViewBag.Aber = aber;
+            ViewBag.num = numb;
+            ViewBag.now = num;
+            List<cross> perem = new List<cross>();
             return View(perem);
+        }
+
+        [HttpGet]
+        public ActionResult Crosswordes(string id)
+        {
+            CrossContext db = new CrossContext();
+            db.cross.Load();
+            db.znach.Load();
+                int di = Convert.ToInt32(id);
+                Crossword cro=new Crossword();
+                foreach (Crossword a in db.cross.Local)
+                {
+                    if (a.id == di)
+                    {
+                        cro = a;
+                    }
+                }
+                
+                InfoCr perem = new InfoCr();
+
+                cro.sort();
+                List<string> aber = new List<string>();
+                foreach (znach a in cro.IdZnach)
+                {
+                    aber.Add(a.row);
+                }
+                perem.preob(aber);
+                byte[,] str = new byte[perem.inf.GetLength(0), perem.inf.GetLength(1)];
+                for (int i = 0; i < perem.inf.GetLength(0); i++)
+                {
+                    for (int j = 0; j < perem.inf.GetLength(1); j++)
+                    {
+                        if (perem.inf[i, j])
+                        {
+                            str[i, j] = 1;
+                        }
+                        else
+                        {
+                            str[i, j] = 0;
+                        }
+                    }
+                }
+                string res = JsonConvert.SerializeObject(perem.inf);
+                string res2 = JsonConvert.SerializeObject(str);
+            
+                ViewBag.res = res;
+                ViewBag.resu = res2;
+                return PartialView(perem);
         }
     }
 }

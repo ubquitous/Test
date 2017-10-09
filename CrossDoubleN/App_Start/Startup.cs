@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
@@ -17,6 +18,14 @@ namespace CrossDoubleN.App_Start
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Account/Login"),
             });
+            try
+            {
+                Models.StaticFunc.GetText();
+            }
+            catch(Exception er)
+            {
+                Debug.WriteLine(er);
+            }
         }
     }
 }

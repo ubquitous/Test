@@ -153,6 +153,7 @@
     <Compile Include="Models\CrossContext.cs" />
     <Compile Include="Models\Crossword.cs" />
     <Compile Include="Models\IdentityExtensions.cs" />
+    <Compile Include="Models\StaticFunc.cs" />
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Home\CrWord.cshtml" />
+    <Content Include="Views\Home\Crosswordes.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

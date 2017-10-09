@@ -10,12 +10,14 @@ using CrossDoubleN.ViewModels; // пространство имен LoginViewMod
 using CrossDoubleN.Models; // пространство имен моделей
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace CrossDoubleN.Controllers
 {
     public class AccountController : Controller
     {
         UserContext db = new UserContext();
+        
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -68,22 +70,24 @@ namespace CrossDoubleN.Controllers
             {
                 AuthenticationManager.SignOut();
             }
-            catch
+            catch(Exception e)
             {
-
+                Debug.WriteLine(e);
             }
             return RedirectToAction("Index", "Home");
         }
+
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.x = val.Name;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(Reg model)
+        public async Task<ActionResult> Register(string name, string password, string confirm_password)
         {
-            
+            Reg model = new Reg() { Name=name, Password=password, Confirm=confirm_password };
             if (ModelState.IsValid)
             {
                 User user = await db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Name == model.Name);
@@ -102,6 +106,7 @@ namespace CrossDoubleN.Controllers
 
                     if (user == null)
                     {
+                        ViewBag.MyMessageToUsers = "Произошла ошибка! Пожалуйста повторите запрос!";
                         return View(model);
                     }
                     else
@@ -109,10 +114,9 @@ namespace CrossDoubleN.Controllers
                         ClaimsIdentity claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String));
                         claim.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name, ClaimValueTypes.String));
-                        claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
-                            "OWIN Provider", ClaimValueTypes.String));
                         if (user.Role != null)
                             claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name, ClaimValueTypes.String));
+
 
                         AuthenticationManager.SignOut();
                         AuthenticationManager.SignIn(new AuthenticationProperties
@@ -121,7 +125,7 @@ namespace CrossDoubleN.Controllers
                         }, claim);
                         return RedirectToAction("Index", "Home");
                     }
-                }
+                } 
                 ViewBag.MyMessageToUsers = "Такой пользователь уже существует!";
             }
             return View(model);
