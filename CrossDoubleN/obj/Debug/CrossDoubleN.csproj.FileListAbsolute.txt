@@ -121,3 +121,6 @@ C:\git-pr\CrossDoubleN\obj\Debug\CrossDoubleN.Properties.Resources.resources
 C:\git-pr\CrossDoubleN\obj\Debug\CrossDoubleN.csproj.GenerateResource.Cache
 C:\git-pr\CrossDoubleN\obj\Debug\CrossDoubleN.dll
 C:\git-pr\CrossDoubleN\obj\Debug\CrossDoubleN.pdb
+C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.dll
+C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.pdb
+C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.xml

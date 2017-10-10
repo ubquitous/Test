@@ -1,0 +1,19 @@
+﻿
+
+@{
+    ViewBag.Title = "Regular";
+}
+@helper GiveURL(List<string> str)
+{
+    <div>
+        @foreach (string b in str)
+        {
+            <a href="@b">@b</a>
+            <br/>
+        }
+    </div>
+}
+
+
+<h2>Ссылки со страницы</h2>
+@GiveURL(ViewBag.Str)

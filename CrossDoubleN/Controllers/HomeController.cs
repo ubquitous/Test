@@ -167,5 +167,12 @@ namespace CrossDoubleN.Controllers
                 ViewBag.resu = res2;
                 return PartialView(perem);
         }
+
+        public ActionResult Regular()
+        {
+            List<string> str = StaticFunc.GetText();
+            ViewBag.Str=str;
+            return View();
+        }
     }
 }

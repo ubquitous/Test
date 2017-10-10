@@ -13,7 +13,7 @@ namespace CrossDoubleN.Models
 {
     public static class StaticFunc
     {
-        public static void GetText()
+        public static List<string> GetText()
         {
             HttpWebRequest proxy_request = (HttpWebRequest)WebRequest.Create("http://www.nonograms.ru/instructions");
             proxy_request.Method = "GET";
@@ -30,29 +30,18 @@ namespace CrossDoubleN.Models
             Regex reg_for_proxy = new Regex(@"(<h1>(.*)</h1>)|(<ol(.+?)</ol>)|(<p>(.+?)</p>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
             //(^p>$z)|((<ol)([^o]*)(ol>))|((<h1>)([^h]*)(h1>))
             MatchCollection collect_math = reg_for_proxy.Matches(html);
-            string b="";
-            foreach (Match a in collect_math)
-            {
+            List<string> b=new List<string>();
 
-                Debug.WriteLine(a);
-                b += Convert.ToString(a);
-
-            }
-
-            Debug.WriteLine("Next");
-            var m_strFilePath = "http://www.nonograms.ru/instructions";
-            string xmlStr;
-            using (var wc = new WebClient())
-            {
-                xmlStr = wc.DownloadString(m_strFilePath);
-            }
-            var xmlDoc = new XmlDocument();
-            xmlDoc.Load("http://www.nonograms.ru/instructions");
-            XmlNodeList lst=xmlDoc.GetElementsByTagName("p");
-            for (int i = 0; i < lst.Count; i++)
-            {
-                Debug.WriteLine(lst[i].InnerXml);
-            }
+            Regex reHref = new Regex(@"(?inx)
+    <a \s [^>]*
+        href \s* = \s*
+            (?<q> ['""] )
+                (?<url> [^""]+ )
+            \k<q>
+    [^>]* >");
+            foreach (Match match in reHref.Matches(html))
+                b.Add(match.Groups["url"].ToString());
+            return b;
         }
     }
 }

@@ -215,6 +215,7 @@
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Home\CrWord.cshtml" />
     <Content Include="Views\Home\Crosswordes.cshtml" />
+    <Content Include="Views\Home\Regular.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
