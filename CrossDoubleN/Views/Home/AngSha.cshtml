@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "AngSha";
+}@helper GiveURL(List<string> str)
+{
+    <div>
+        @for (int i = 0; i < str.Count;i+=2 )
+        {
+            <a href="@str[i]">@((i/2)+1))@str[i+1]</a>
+            <br />
+        }
+    </div>
+}
+
+
+<h2>AngSha</h2>
+@GiveURL(ViewBag.Str)
+
+

@@ -171,7 +171,15 @@ namespace CrossDoubleN.Controllers
         public ActionResult Regular()
         {
             List<string> str = StaticFunc.GetText();
-            ViewBag.Str=str;
+            StaticFunc.AS();
+            ViewBag.Str = str;
+            return View();
+        }
+
+        public ActionResult AngSha()
+        {
+            List<string> str = StaticFunc.AS();
+            ViewBag.Str = str;
             return View();
         }
     }

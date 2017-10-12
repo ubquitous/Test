@@ -18,14 +18,6 @@ namespace CrossDoubleN.App_Start
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Account/Login"),
             });
-            try
-            {
-                Models.StaticFunc.GetText();
-            }
-            catch(Exception er)
-            {
-                Debug.WriteLine(er);
-            }
         }
     }
 }

@@ -124,3 +124,5 @@ C:\git-pr\CrossDoubleN\obj\Debug\CrossDoubleN.pdb
 C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.dll
 C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.pdb
 C:\git-pr\CrossDoubleN\bin\HtmlAgilityPack.xml
+C:\git-pr\CrossDoubleN\bin\AngleSharp.dll
+C:\git-pr\CrossDoubleN\bin\AngleSharp.xml
